@@ -53,7 +53,8 @@ Change ownership: ```sudo chown -R grader:grader catalog```
 move into new directory: ```cd catalog```
 Clone ItemCatalog repository: ```git clone https://github.com/kpcollier/ItemCatalog.git```
 Update catalog.wsgi file: ```sudo nano catalog.wsgi```
-Add: ```
+Add: 
+```
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
@@ -62,7 +63,8 @@ sys.path.insert(0, "/var/www/catalog/")
 activate_this = '/var/www/catalog/venv/bin/activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
 
-from ItemCatalog import app as application```
+from ItemCatalog import app as application
+```
 
 ## Install Virtualenv
 First, install pip:```sudo apt-get install python-pip```
