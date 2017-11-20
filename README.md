@@ -85,3 +85,6 @@ activate virtual env: ```source venv/bin/activate```
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+Enable: ```sudo a2enmod catalog```
+
+## 
