@@ -45,3 +45,43 @@ Enable with: ```sudo a2enmod wsgi```
 Change ownership ```sudo chown -R grader:grader catalog```
 move into new directory: ```cd catalog```
 Clone ItemCatalog repository: ```git clone https://github.com/kpcollier/ItemCatalog.git```
+Update catalog.wsgi file: ```sudo nano catalog.wsgi```
+Add: ```import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0, "/var/www/catalog/")
+
+from catalog import app as application```
+
+## Install Virtualenv
+```sudo apt-get install python-pip```
+```sudo pip install virtualenv```
+```cd /var/www/catalog``` ```sudo virtualenv venv```
+activate virtual env: ```source venv/bin/activate```
+```sudo pip install Flask```
+```sudo pip install bleach httplib2 request oauth2client sqlalchemy psycopg2```
+
+## Configure Virtual Host
+1. Create a virtual host conifg file: `$ sudo nano /etc/apache2/sites-available/catalog.conf`.
+2. Paste:
+```
+<VirtualHost *:80>
+    ServerName 54.190.193.14
+    ServerAdmin admin@54.190.193.14
+    WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
+    WSGIProcessGroup catalog
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+    <Directory /var/www/catalog/catalog/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/catalog/catalog/static
+    <Directory /var/www/catalog/catalog/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
