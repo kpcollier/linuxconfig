@@ -2,8 +2,8 @@
 Create a server side application to host the menu catalog that was created for Project 4. This is how I completed this.
 
 ## Log In Info
-IP @ 54.190.193.14
-SSH Port: 2200
+* IP @ 54.190.193.14
+* SSH Port: 2200
 
 ## Update and Upgrade packages
 For best security practices update your packages.
