@@ -25,14 +25,16 @@ Copy root sudoers.d file to grader and update grader file to change name from "u
 * Go on your local machine and type ```ssh-keygen```
 * Go to your grader. ```mkdir .ssh``` ```touch .ssh/authorized_keys```
 * Paste public key from local machine into grader authorized_keys file.
+* Set restrictions to the folder and file. ```chmod 700 .ssh``` ```chmod 644 .ssh/authorized_keys```
 You can now log in to grader from local machine.
 
 ## Change SSH port from 22 to 2200
 ```sudo nano /etc/ssh/sshd_config```
 Find the line with "Port 22" and change to "Port 2200"
+* Make sure to allow connections from port 2200 in the firewall.
 
 ## Update Firewall
-Update the firewall to allow connecitions coming from only 2200, 80, and 123.
+Update the firewall to allow connections coming from only 2200, 80, and 123.
 * ```sudo ufw allow 2200/tcp```
 * ```sudo ufw allow 80/tcp```
 * ```sudo ufw allow 123/udp```
@@ -40,13 +42,13 @@ Update the firewall to allow connecitions coming from only 2200, 80, and 123.
 
 ## Install Apache and mod_wsgi file
 ```sudo apt-get install apache2```
-Mod_wsgi is an Apache HTTP server mod that enables Apache to serve Flask applications. Install mod_wsgi with the following command:
+Mod_wsgi is an Apache HTTP server mod that enables Apache to serve Flask applications. Install mod_wsgi:
 ```sudo apt-get install libapache2-mod-wsgi python-dev```
 Enable with: ```sudo a2enmod wsgi```
 ```sudo service apache2 start```
 
 ## Install Git and clone ItemCatalog
-Install Git if its not already: ```sudo apt-get install git```
+Install Git if it is not already: ```sudo apt-get install git```
 Move directories: ```cd /var/www```
 Make directory: ```mkdir catalog```
 Change ownership: ```sudo chown -R grader:grader catalog```
@@ -122,6 +124,7 @@ engine = create_engine('postgresql://catalog:goodpassword@localhost/catalog')
 ```sudo service apache2 restart```
 
 ## ACKNOWLEDGMENTS
-Trish from Udacity 1:1.
-Rob from Udacity Forums.
-Greg Berger from Udacity Forums.
+* Trish from Udacity 1:1.
+* Greg from Udacity 1:1.
+* DigitalOcean tutorials.
+* Udacity Forums.
