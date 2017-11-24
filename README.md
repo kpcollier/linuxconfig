@@ -13,6 +13,7 @@ For best security practices update your packages.
 ## Create User grader
 Create a new user named grader.
 ```sudo adduser grader```
+* Give grader password ```goodpassword```
 
 ## Install Finger
 Finger is a package that lists information about users
